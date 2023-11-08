@@ -11,8 +11,8 @@ def __on_connect(client: mqtt.Client, userdata, flags, rc: int):
 
 
 def __on_message(client: mqtt.Client, userdata, msg: mqtt.MQTTMessage):
-    global last_message_in_bytes
-    last_message_in_bytes.append(msg.payload)
+    global messages_in_bytes
+    messages_in_bytes.append(msg.payload)
     print("MQTT:" + msg.topic + " " + str(msg.payload.decode()))
 
 
@@ -23,7 +23,7 @@ def __connect_mqtt(client: mqtt.Client):
     return client
 
 
-last_message_in_bytes: list[bytes] = []
+messages_in_bytes: list[bytes] = []
 mqtt_client = mqtt.Client()
 __connect_mqtt(mqtt_client)
 
